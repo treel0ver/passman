@@ -1,5 +1,5 @@
 import os 
-from encrypt import new_entry_encryption, decrypt
+from encrypt import new_entry_encryption, decrypt_and_copy_to_clipboard
 import pyperclip
 import codecs
 import secrets
@@ -19,6 +19,7 @@ def show(items, database_name, names):
             n += 1
 
 def manage_database(database_name, master_password_raw):
+    print("—" * 80)
     print("Database open:", database_name)
 
     while 1:
@@ -31,9 +32,9 @@ def manage_database(database_name, master_password_raw):
                 print(n, end=" "), print(item)
                 database_name.append(item)
                 n += 1
-        print()
+        print("—" * 80)
         show(items, database_name, names)
-        print()
+        print("—" * 80)
         
         print("What do you want to do?")
         print("1. Store new password entry.")
@@ -71,9 +72,9 @@ def manage_database(database_name, master_password_raw):
 
                     print(f"You selected: {selected_file}")
                     print(f"Path to the selected: {file_to_open}")
-                    decrypt(file_to_open, master_password_raw, it_const)
+                    decrypt_and_copy_to_clipboard(file_to_open, master_password_raw, it_const)
 
                 else:
-                    print("Invalid choice. Please select a valid folder number.")
+                    print("Invalid choice.")
             except ValueError:
-                print("Invalid input. Please enter a valid number.")
+                print("Invalid choice.")

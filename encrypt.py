@@ -2,7 +2,9 @@ from Crypto.Cipher import AES
 from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Util.Padding import pad, unpad
 import os
+import time
 import pyperclip
+import sys
 
 def new_entry_encryption(MP, iteration_number, entry_name, entry_password):
     password = MP
@@ -27,7 +29,25 @@ def unpad_data(data):
         raise ValueError("Invalid padding size")
     return data[:-padding_size]
 
-def decrypt(file_to_open, MP, iteration_number):
+def loading_bar(duration):
+    bar_length = 50
+    start_time = time.time()
+    end_time = start_time + duration
+
+    while time.time() < end_time:
+        elapsed_time = time.time() - start_time
+        progress = elapsed_time / duration
+        bar = "-" * int(bar_length * progress)
+        spaces = " " * (bar_length - len(bar))
+
+        sys.stdout.write(f"\r[{bar}{spaces}] {int(progress * 100)}%")
+        sys.stdout.flush()
+        time.sleep(0.1)
+
+    sys.stdout.write("\n")
+    sys.stdout.flush()
+
+def decrypt_and_copy_to_clipboard(file_to_open, MP, iteration_number):
     with open(file_to_open, "rb") as file:
         salt = file.read(16)  # Read the salt
         iv = file.read(16)    # Read the IV
@@ -38,4 +58,8 @@ def decrypt(file_to_open, MP, iteration_number):
     cipher = AES.new(key, AES.MODE_CBC, iv)
     decrypted_data = cipher.decrypt(cipher_text)
     plain_text = unpad_data(decrypted_data).decode('utf-8')
+
+    print("Copying content to clipboard. Cleaning clipboard in 10 seconds...")
     pyperclip.copy(plain_text)
+    loading_bar(10)
+    pyperclip.copy("")
