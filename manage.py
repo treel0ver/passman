@@ -6,13 +6,6 @@ import secrets
 import string
 import getpass
 
-# Define the characters you want in your random string
-characters = string.ascii_letters + string.punctuation
-
-# Generate a cryptographically secure random string of length 31
-random_string = ''.join(secrets.choice(characters) for _ in range(31))
-
-print(random_string)
 it_const = 1000000
 
 def show(items, database_name, names):
@@ -82,5 +75,3 @@ def manage_database(database_name, master_password_raw):
                     print("Invalid choice. Please select a valid folder number.")
             except ValueError:
                 print("Invalid input. Please enter a valid number.")
-
-    
