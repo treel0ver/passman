@@ -27,7 +27,7 @@ def create_new_database(folder_path):
             master_password = getpass.getpass("Enter your new master password: ")
             master_password_test = getpass.getpass("Enter it again for confirmation: ")
             if master_password == master_password_test:
-                print("Passwords match!")
+                print("\033[32mPasswords match! Creating database...\033[0m")
                 os.mkdir(folder_name)
                 print(f"Folder '{folder_name}' created successfully.")
                 hash = ph.hash(master_password)
@@ -59,8 +59,9 @@ def open_existing_database(name):
 
     master_password_try = getpass.getpass("Enter the master password: ")
 
-    if ph.verify(stored_hash, master_password_try):
+    try:
+        ph.verify(stored_hash, master_password_try)
         print("\033[32mPassword is correct.\033[0m")
         manage_database(name, master_password_try)
-    else:
+    except:
         print("Password is incorrect.")

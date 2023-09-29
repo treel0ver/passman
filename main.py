@@ -23,24 +23,25 @@ else:
     print(f"Folder '{folder_path}' found.")
 
 while True:
-    print("\nMenu:")
+    print("—" * 80)
+    print("Menu:")
     print("1. Create new database")
     print("2. Open existing database")
-    print()
     print("Any key to Exit")
+    print("—" * 80)
 
     choice = input("Enter your choice: ")
 
     if choice == "1":
+        print("—" * 80)
         print("Creating a new database...")
         create_new_database(folder_path)
     elif choice == "2":
+        print("—" * 80)
         print("Which database do you want to open?")
 
         items = os.listdir(folder_path)
-
         folder_names = []
-
         n = 1
         for item in items:
             item_path = os.path.join(folder_path, item)
@@ -49,6 +50,7 @@ while True:
                 folder_names.append(item)
                 n += 1
 
+        print("—" * 80)
         try:
             choice = int(input("Enter the number of the folder you want to open: "))
 

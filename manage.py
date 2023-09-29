@@ -42,6 +42,7 @@ def manage_database(database_name, master_password_raw):
         
         choice = input()
         if choice == "1":
+            print("—" * 80)
             print("What name do you want for this new password entry?")
             entry_name = database_name + "/" + input()
             print("Enter the password to store in the entry (type 'gen' for a random secure password to be generated):")
@@ -56,8 +57,9 @@ def manage_database(database_name, master_password_raw):
             else:
                 print("Error, the password has not enough length for the program to continue.")
         if choice == "2":
+            print("—" * 80)
             show(items, database_name, names)
-
+            print("—" * 80)
             print("Which one? Type the number of the password you want to copy")
 
             try:
