@@ -64,4 +64,4 @@ def open_existing_database(name):
         print("\033[32mPassword is correct.\033[0m")
         manage_database(name, master_password_try)
     except:
-        print("Password is incorrect.")
+        print("\033[31mSome error occured!\033[0m")
