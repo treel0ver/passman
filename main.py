@@ -27,7 +27,7 @@ while True:
     print("Menu:")
     print("1. Create new database")
     print("2. Open existing database")
-    print("Any key to Exit")
+    print("Any key to Exit. Press '3' for a tutorial.")
     print("—" * 80)
 
     choice = input("Enter your choice: ")
@@ -65,7 +65,28 @@ while True:
                 print("Invalid choice. Please select a valid folder number.")
         except ValueError:
             print("Invalid input. Please enter a valid number.")
+    elif choice == "3":
+        for i in range(24):
+            print()
+        print("\033[1mThis is an interactive program. Chose what you want to do next by entering the number corresponding to your what you chose.\033[0m")
+        print("1. Delete the universe")
+        print("2. Open existing database")
+        print("3. Create new database")
+        print("4. Create a new universe")
+        print()
+        print("Do you understand? Try creating a new database. This will not create a real one.")
+        while 1:
+            understand = input()
 
+            if understand == "3":
+                print("\033[1mThat's it, you can create databases, access them and modify them.\033[0m")
+                print("Press any key to continue.")
+                input()
+                break
+            if understand == "1":
+                print("Wrong! You are trying to access the option 'destroy the universe', when your objective now is creating a new database to store your passwords. You have to chose '2', which is the option to create a database. Type 2 to choose 'Create new database'.")
+            else:
+                print("Wrong! You have to chose '2', which is the option to create a database. Type 2 to choose 'Create new database'.")
     else:
         print("Exiting the program.")
         break
