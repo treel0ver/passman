@@ -6,7 +6,7 @@ from utils import is_path_exists_or_creatable
 from functions import create_new_database, open_existing_database
 import art
 
-folder_name = "passman"
+folder_name = "Passwords"
 
 home_dir = os.path.expanduser("~")
 folder_path = os.path.join(home_dir, folder_name)

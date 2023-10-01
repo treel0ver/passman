@@ -10,10 +10,21 @@ import shutil
 it_const = 1000000
 
 def delete_password(file_to_open, database_name):
-    if not os.path.exists(database_name + "/trash"):
-        os.makedirs(database_name + "/trash")
-    shutil.move(file_to_open, database_name + "/trash")
-    print(file_to_open + " has been moved to " + database_name + "/trash")
+    print("\033[1mAre you sure you want to remove this password entry? It will be moved to the trash folder, in which you can delete it permanently from your computer. (Y/n)\033[0m")
+    delete_permanently_choice = input()
+    if delete_permanently_choice == "yes":
+        if not os.path.exists(database_name + "/trash"):
+            os.makedirs(database_name + "/trash")
+        shutil.move(file_to_open, database_name + "/trash")
+        print(file_to_open + " has been moved to " + database_name + "/trash")
+    elif delete_permanently_choice == "":
+        if not os.path.exists(database_name + "/trash"):
+            os.makedirs(database_name + "/trash")
+        shutil.move(file_to_open, database_name + "/trash")
+        print(file_to_open + " has been moved to " + database_name + "/trash")
+    else:
+        print("Cancelling...")
+
 def show(items, database_name, names):
     n = 1
     print("Password entries:")
@@ -29,7 +40,7 @@ def manage_database(database_name, master_password_raw):
     print("Database open:", database_name)
 
     while 1:
-        items = os.listdir(database_name)  # Move this line outside of the loop
+        items = os.listdir(database_name) 
         names = []  
         for item in items:
             item_path = os.path.join(database_name, item)
@@ -105,5 +116,5 @@ def manage_database(database_name, master_password_raw):
                     print("Invalid choice.")
             except ValueError:
                 print("Invalid choice.")
-        elif choice =="4":
+        elif choice == "4":
             break
