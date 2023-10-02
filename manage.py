@@ -67,7 +67,7 @@ def manage_database(database_name, master_password_raw):
             entry_password = getpass.getpass()
             if len(entry_password) > 2:
                 if entry_password == "gen":
-                    characters = string.ascii_letters + string.punctuation
+                    characters = string.ascii_letters + string.punctuation + "12345678980"
                     secure_random_password = ''.join(secrets.choice(characters) for _ in range(31))
                     new_entry_encryption(master_password_raw, it_const, entry_name, secure_random_password)
                 else:
